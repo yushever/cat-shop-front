@@ -58,7 +58,7 @@ export default function Featured({ product }) {
                   white={1}>
                   Read more
                 </ButtonLink>
-                <Button white onClick={addFeaturedToCart}>
+                <Button white={1} onClick={addFeaturedToCart}>
                   <CartIcon />
                   Add to cart
                 </Button>

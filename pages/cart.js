@@ -45,7 +45,8 @@ const CityHolder = styled.div`
 `;
 
 export default function CartPage() {
-  const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart } =
+    useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -53,6 +54,7 @@ export default function CartPage() {
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -63,6 +65,16 @@ export default function CartPage() {
       setProducts([]);
     }
   }, [cartProducts]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    if (window.location.href.includes("success")) {
+      setIsSuccess(true);
+      clearCart();
+    }
+  }, []);
 
   function moreOfThisProduct(id) {
     addProduct(id);
@@ -93,7 +105,7 @@ export default function CartPage() {
     }
   }
 
-  if (window.location.href.includes("success")) {
+  if (isSuccess) {
     return (
       <>
         <Header />
@@ -128,7 +140,7 @@ export default function CartPage() {
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr>
+                    <tr key={product._id}>
                       <ProductInfoCell>
                         <ProductImageBox>
                           <img src={product.images[0]} alt={product.title} />
@@ -217,7 +229,7 @@ export default function CartPage() {
                 name="products"
                 value={cartProducts.join(",")}
               />
-              <Button block black onClick={goToPayment}>
+              <Button block={1} black={1} onClick={goToPayment}>
                 Continue to payment
               </Button>
             </Box>

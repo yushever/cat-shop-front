@@ -1,7 +1,6 @@
 import Featured from "@/components/Featured";
 import Header from "@/components/Header";
 import { mongooseConnect } from "@/lib/mongoose";
-import { Inter } from "next/font/google";
 import { Product } from "@/models/Product";
 import NewProducts from "@/components/NewProducts";
 

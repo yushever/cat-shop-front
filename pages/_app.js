@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import { CartContextProvider } from "@/components/CartContext";
 
 const GlobalStyles = createGlobalStyle`

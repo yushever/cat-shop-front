@@ -12,6 +12,7 @@ export const ButtonStyle = css`
   align-items: center;
   text-decoration: none;
   font-weight: 500;
+  font-size: 15px;
   svg {
     height: 15px;
     margin-right: 5px;

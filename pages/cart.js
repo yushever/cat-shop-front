@@ -60,7 +60,9 @@ const QuantityLabel = styled.span`
 const CityHolder = styled.div`
   display: flex;
   gap: 5px;
-  padding: 0 15px;
+  justify-content: space-around;
+  width: 100%;
+  /* padding: 0 15px; */
 `;
 
 export default function CartPage() {

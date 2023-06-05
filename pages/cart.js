@@ -60,9 +60,6 @@ const QuantityLabel = styled.span`
 const CityHolder = styled.div`
   display: flex;
   gap: 5px;
-  justify-content: space-around;
-  width: 100%;
-  /* padding: 0 15px; */
 `;
 
 export default function CartPage() {
@@ -95,6 +92,14 @@ export default function CartPage() {
       setIsSuccess(true);
       clearCart();
     }
+    axios.get("/api/address").then((response) => {
+      setName(response.data.name);
+      setEmail(response.data.email);
+      setCity(response.data.city);
+      setPostalCode(response.data.postalCode);
+      setStreetAddress(response.data.streetAddress);
+      setCountry(response.data.country);
+    });
   }, []);
 
   function moreOfThisProduct(id) {

@@ -9,12 +9,15 @@ import { authOptions } from "./api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 
 export default function ProductsPage({ products, wishedProducts }) {
+  console.log(wishedProducts);
   return (
     <>
       <Header />
       <Center>
         <Title>All products</Title>
-        <ProductsGrid products={products}></ProductsGrid>
+        <ProductsGrid
+          products={products}
+          wishedProducts={wishedProducts}></ProductsGrid>
       </Center>
     </>
   );
@@ -26,7 +29,7 @@ export async function getServerSideProps(ctx) {
   const session = await getServerSession(ctx.req, ctx.res, authOptions);
   const wishedProducts = session?.user
     ? await WishedProduct.find({
-        userEmail: ession?.user.email,
+        userEmail: session?.user.email,
         product: products.map((p) => p._id.toString()),
       })
     : [];

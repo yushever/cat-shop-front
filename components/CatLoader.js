@@ -23,7 +23,7 @@ const Loader = styled.div`
 export default function CatLoader() {
   return (
     <Loader>
-      <Image width="50" height="50" src="/../public/cat.png">
+      <Image width="50" height="50" src="/../public/cat.png" alt="">
         {cat}
       </Image>
     </Loader>

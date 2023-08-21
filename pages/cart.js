@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { RevealWrapper } from "next-reveal";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
@@ -73,6 +74,7 @@ export default function CartPage() {
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -92,6 +94,12 @@ export default function CartPage() {
       setIsSuccess(true);
       clearCart();
     }
+  }, []);
+
+  useEffect(() => {
+    if (!session) {
+      return;
+    }
     axios.get("/api/address").then((response) => {
       setName(response.data.name);
       setEmail(response.data.email);
@@ -100,7 +108,7 @@ export default function CartPage() {
       setStreetAddress(response.data.streetAddress);
       setCountry(response.data.country);
     });
-  }, []);
+  }, [session]);
 
   function moreOfThisProduct(id) {
     addProduct(id);

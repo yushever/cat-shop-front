@@ -56,6 +56,13 @@ const ButtonsWrapper = styled.div`
   gap: 10px;
   margin-top: 25px;
 `;
+const ImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  background-color: white;
+`;
 
 export default function Featured({ product }) {
   const { setCartProducts, addProduct } = useContext(CartContext);
@@ -93,11 +100,10 @@ export default function Featured({ product }) {
           </Column>
           <Column>
             <RevealWrapper delay={0}>
-              {" "}
-              <img
-                className={"main"}
-                src="https://t4.ftcdn.net/jpg/00/97/58/97/360_F_97589769_t45CqXyzjz0KXwoBZT9PRaWGHRk5hQqQ.jpg"
-                alt=""></img>
+              <ImageWrapper>
+                {" "}
+                <img className={"main"} src={product.images?.[0]} alt=""></img>
+              </ImageWrapper>{" "}
             </RevealWrapper>
           </Column>
         </ColumnsWrapper>

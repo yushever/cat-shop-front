@@ -11,6 +11,8 @@ import Input from "@/components/Input";
 import axios from "axios";
 import CatLoader from "@/components/CatLoader";
 import ProductBox from "@/components/ProductBox";
+import Tabs from "@/components/Tabs";
+import SingleOrder from "@/components/SingleOrder";
 
 const ColsWrapper = styled.div`
   display: grid;
@@ -32,6 +34,7 @@ const WishedProductsGrid = styled.div`
 `;
 
 export default function AccountPage() {
+  const { data: session } = useSession();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
@@ -40,8 +43,10 @@ export default function AccountPage() {
   const [country, setCountry] = useState("");
   const [addressLoaded, setAddressLoaded] = useState(true);
   const [wishlistLoaded, setWishlistLoaded] = useState(true);
-  const { data: session } = useSession();
+  const [ordersLoaded, setOrdersLoaded] = useState(true);
   const [wishedProducts, setWishedProducts] = useState([]);
+  const [activeTab, setActiveTab] = useState("Orders");
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     if (!session) {
@@ -49,6 +54,7 @@ export default function AccountPage() {
     }
     setAddressLoaded(false);
     setWishlistLoaded(false);
+    setOrdersLoaded(false);
     axios.get("/api/address").then((response) => {
       setName(response.data.name);
       setEmail(response.data.email);
@@ -61,6 +67,10 @@ export default function AccountPage() {
     axios.get("/api/wishlist").then((response) => {
       setWishedProducts(response.data.map((p) => p.product));
       setWishlistLoaded(true);
+    });
+    axios.get("/api/orders").then((response) => {
+      setOrders(response.data);
+      setOrdersLoaded(true);
     });
   }, [session]);
 
@@ -93,30 +103,59 @@ export default function AccountPage() {
           <div>
             <RevealWrapper delay={0}>
               <WhiteBox>
-                <h2>Wishlist</h2>
-                {wishlistLoaded ? (
-                  <WishedProductsGrid>
-                    {wishedProducts.length > 0 &&
-                      wishedProducts.map((p, index) => (
-                        <ProductBox
-                          key={p._id}
-                          {...p}
-                          wished={true}
-                          onRemoveFromWishlist={productRemovedFromWishlist}
-                        />
-                      ))}
-                    {wishedProducts.length === 0 && (
-                      <>
-                        {session ? (
-                          <p>Your wishlist is empty</p>
-                        ) : (
-                          <p>Log in to add products</p>
+                <Tabs
+                  tabs={["Orders", "Wishlist"]}
+                  active={activeTab}
+                  onChange={setActiveTab}
+                />
+                {activeTab === "Wishlist" ? (
+                  <>
+                    {" "}
+                    {wishlistLoaded ? (
+                      <WishedProductsGrid>
+                        {wishedProducts.length > 0 &&
+                          wishedProducts.map((p, index) => (
+                            <ProductBox
+                              key={p._id}
+                              {...p}
+                              wished={true}
+                              onRemoveFromWishlist={productRemovedFromWishlist}
+                            />
+                          ))}
+                        {wishedProducts.length === 0 && (
+                          <>
+                            {session ? (
+                              <p>Your wishlist is empty</p>
+                            ) : (
+                              <p>Log in to add products</p>
+                            )}
+                          </>
                         )}
-                      </>
+                      </WishedProductsGrid>
+                    ) : (
+                      <CatLoader />
                     )}
-                  </WishedProductsGrid>
+                  </>
                 ) : (
-                  <CatLoader />
+                  <>
+                    {!ordersLoaded ? (
+                      <CatLoader />
+                    ) : (
+                      <div>
+                        {orders.length > 0 &&
+                          orders.map((o) => <SingleOrder {...o} />)}
+                        {orders.length === 0 && (
+                          <>
+                            {session ? (
+                              <p>No orders</p>
+                            ) : (
+                              <p>Log in to see your orders</p>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </>
                 )}
               </WhiteBox>
             </RevealWrapper>

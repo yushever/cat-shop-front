@@ -8,11 +8,14 @@ export const ButtonStyle = css`
   border-radius: 5px;
   cursor: pointer;
   box-sizing: border-box;
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   text-decoration: none;
   font-weight: 500;
-  font-size: 15px;
+  a {
+    text-align: center;
+  }
   svg {
     height: 15px;
     margin-right: 5px;

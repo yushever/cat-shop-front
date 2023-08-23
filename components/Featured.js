@@ -50,6 +50,7 @@ const ColumnsWrapper = styled.div`
 const Column = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -60,7 +61,7 @@ const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: 100%;
   background-color: white;
 `;
 

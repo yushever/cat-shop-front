@@ -57,7 +57,9 @@ export default function SearchPage() {
           />
         </InputWrapper>
         {!isLoading && phrase !== "" && products.length === 0 && (
-          <h2>No products found for query "{phrase}"</h2>
+          <h2>
+            No products found for query <b>{phrase}</b>
+          </h2>
         )}
         {isLoading && <CatLoader />}
         {!isLoading && products.length > 0 && (

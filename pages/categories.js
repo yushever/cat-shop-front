@@ -60,7 +60,7 @@ export default function CategoriesPage({
         {" "}
         <Title>All categories</Title>
         {mainCategories.map((category) => (
-          <CategoryWrapper key={category.name}>
+          <CategoryWrapper key={category._id}>
             <CategoryTitle>
               <h2>{category.name[0].toUpperCase() + category.name.slice(1)}</h2>
               <div>
@@ -69,7 +69,7 @@ export default function CategoriesPage({
             </CategoryTitle>
             <CategoryGrid>
               {categoriesProducts[category._id].map((p, index) => (
-                <RevealWrapper key={p.title} delay={50 * index}>
+                <RevealWrapper key={index} delay={50 * index}>
                   <ProductBox {...p} wished={wishedProducts.includes(p._id)} />
                 </RevealWrapper>
               ))}

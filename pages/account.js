@@ -143,9 +143,7 @@ export default function AccountPage() {
                     ) : (
                       <div>
                         {orders.length > 0 &&
-                          orders.map((o) => (
-                            <SingleOrder {...o} key={o.createdAt} />
-                          ))}
+                          orders.map((o) => <SingleOrder {...o} key={o._id} />)}
                         {orders.length === 0 && (
                           <>
                             {session ? (

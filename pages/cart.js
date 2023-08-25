@@ -42,6 +42,14 @@ const Box = styled.div`
 const ProductInfoCell = styled.td`
   padding: 10px 0;
 `;
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
 const ProductImageBox = styled.div`
   display: flex;
   align-items: center;
@@ -202,20 +210,22 @@ export default function CartPage() {
                           {product.title}
                         </ProductInfoCell>
                         <td>
-                          <Button
-                            onClick={() => lessOfThisProduct(product._id)}>
-                            -
-                          </Button>
-                          <QuantityLabel>
-                            {
-                              cartProducts.filter((id) => id === product._id)
-                                .length
-                            }
-                          </QuantityLabel>
-                          <Button
-                            onClick={() => moreOfThisProduct(product._id)}>
-                            +
-                          </Button>
+                          <ButtonWrapper>
+                            <Button
+                              onClick={() => lessOfThisProduct(product._id)}>
+                              -
+                            </Button>
+                            <QuantityLabel>
+                              {
+                                cartProducts.filter((id) => id === product._id)
+                                  .length
+                              }
+                            </QuantityLabel>
+                            <Button
+                              onClick={() => moreOfThisProduct(product._id)}>
+                              +
+                            </Button>
+                          </ButtonWrapper>
                         </td>
                         <td>
                           $

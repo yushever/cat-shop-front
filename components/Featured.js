@@ -62,7 +62,6 @@ const ImageWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: white;
 `;
 
 export default function Featured({ product }) {

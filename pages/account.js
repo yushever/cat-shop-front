@@ -47,7 +47,7 @@ export default function AccountPage() {
   const [wishedProducts, setWishedProducts] = useState([]);
   const [activeTab, setActiveTab] = useState("Orders");
   const [orders, setOrders] = useState([]);
-
+  console.log(wishedProducts);
   useEffect(() => {
     if (!session) {
       return;
@@ -143,7 +143,9 @@ export default function AccountPage() {
                     ) : (
                       <div>
                         {orders.length > 0 &&
-                          orders.map((o) => <SingleOrder {...o} />)}
+                          orders.map((o) => (
+                            <SingleOrder {...o} key={o.createdAt} />
+                          ))}
                         {orders.length === 0 && (
                           <>
                             {session ? (

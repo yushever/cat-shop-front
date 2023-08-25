@@ -1,5 +1,5 @@
-import Image from "next/image";
 import styled, { keyframes } from "styled-components";
+import Cat from "./icons/Cat";
 
 const rotate = keyframes`
   from {
@@ -22,7 +22,7 @@ const Loader = styled.div`
 export default function CatLoader() {
   return (
     <Loader>
-      <Image width="50" height="50" src="/../public/cat.png" alt=""></Image>
+      <Cat />
     </Loader>
   );
 }

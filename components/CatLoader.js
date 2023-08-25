@@ -1,4 +1,3 @@
-import { cat } from "../public/cat.png";
 import Image from "next/image";
 import styled, { keyframes } from "styled-components";
 
@@ -23,9 +22,7 @@ const Loader = styled.div`
 export default function CatLoader() {
   return (
     <Loader>
-      <Image width="50" height="50" src="/../public/cat.png" alt="">
-        {cat}
-      </Image>
+      <Image width="50" height="50" src="/../public/cat.png" alt=""></Image>
     </Loader>
   );
 }
